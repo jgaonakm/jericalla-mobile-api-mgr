@@ -1,7 +1,7 @@
 {
   "info": {
-    "title": "Jericalla Mobile API v1",
-    "version": "1.0.0"
+    "title": "Jericalla Mobile API v2",
+    "version": "2.0.0"
   },
   "openapi": "3.0.1",
   "components": {
@@ -132,7 +132,7 @@
     }
   },
   "paths": {
-    "/api/v1/Customer/{id}": {
+    "/api/v2/Customer/{id}": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -206,7 +206,7 @@
             "inbound": []
           }
         },
-        "summary": "Get customer information (deprecated)"
+        "summary": "Get customer information"
       },
       "put": {
         "tags": [
@@ -285,10 +285,10 @@
             "inbound": []
           }
         },
-        "summary": "Update customer information (deprecated)"
+        "summary": "Update customer information"
       }
     },
-    "/api/v1/Customer/{id}/usage": {
+    "/api/v2/Customer/{id}/usage": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -362,10 +362,10 @@
             "inbound": []
           }
         },
-        "summary": "Get customer usage (deprecated)"
+        "summary": "Get customer usage"
       }
     },
-    "/api/v1/Customer/{id}/change-plan": {
+    "/api/v2/Customer/{id}/change-plan": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -420,10 +420,10 @@
             "inbound": []
           }
         },
-        "summary": "Change customer plan (deprecated)"
+        "summary": "Change customer plan"
       }
     },
-    "/api/v1/Network/signal": {
+    "/api/v2/Network/signal": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -486,18 +486,20 @@
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "default",
-            "module": "$import(./modules/deprecated)",
-            "options": {}
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.NETWORK_URL}"
+            }
           },
           "policies": {
             "inbound": []
           }
         },
-        "summary": "Get signal for location (deprecated)"
+        "summary": "Get signal for location"
       }
     },
-    "/api/v1/Network/sim/activate": {
+    "/api/v2/Network/sim/activate": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -533,18 +535,20 @@
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "default",
-            "module": "$import(./modules/hello-world)",
-            "options": {}
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.NETWORK_URL}"
+            }
           },
           "policies": {
             "inbound": []
           }
         },
-        "summary": "Activate SIM (deprecated)"
+        "summary": "Activate SIM"
       }
     },
-    "/api/v1/Network/sim/deactivate": {
+    "/api/v2/Network/sim/deactivate": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -590,10 +594,10 @@
             "inbound": []
           }
         },
-        "summary": "Deactivate SIM (deprecated)"
+        "summary": "Deactivate SIM"
       }
     },
-    "/api/v1/Network/device/register": {
+    "/api/v2/Network/device/register": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -665,10 +669,10 @@
             "inbound": []
           }
         },
-        "summary": "Register a new device (deprecated)"
+        "summary": "Register a new device"
       }
     },
-    "/api/v1/Network/roaming": {
+    "/api/v2/Network/roaming": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -741,10 +745,10 @@
             "inbound": []
           }
         },
-        "summary": "Get roaming status (deprecated)"
+        "summary": "Get roaming status"
       }
     },
-    "/api/v1/Network/roaming/update": {
+    "/api/v2/Network/roaming/update": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -798,10 +802,10 @@
             "inbound": []
           }
         },
-        "summary": "Update roaming info (deprecated)"
+        "summary": "Update roaming info"
       }
     },
-    "/api/v1/Enterprise/partners": {
+    "/api/v2/Enterprise/partners": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -839,10 +843,10 @@
             "inbound": []
           }
         },
-        "summary": "Get all partners (deprecated)"
+        "summary": "Get all partners"
       }
     },
-    "/api/v1/Enterprise/accounts": {
+    "/api/v2/Enterprise/accounts": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -880,10 +884,10 @@
             "inbound": []
           }
         },
-        "summary": "Get all accounts (deprecated)"
+        "summary": "Get all accounts"
       }
     },
-    "/api/v1/Enterprise/sim/provision": {
+    "/api/v2/Enterprise/sim/provision": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -955,10 +959,10 @@
             "inbound": []
           }
         },
-        "summary": "Provision SIMs (deprecated)"
+        "summary": "Provision SIMs"
       }
     },
-    "/api/v1/Enterprise/agreements": {
+    "/api/v2/Enterprise/agreements": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -996,7 +1000,7 @@
             "inbound": []
           }
         },
-        "summary": "Get partnership agreements (deprecated)"
+        "summary": "Get partnership agreements"
       }
     }
   }
