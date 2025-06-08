@@ -1,3 +1,23 @@
 {
-  "policies": []
+  "policies": [
+    {
+      "handler": {
+        "export": "SleepInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "sleepInMs": 1000
+        }
+      },
+      "name": "sleep-inbound",
+      "policyType": "sleep-inbound"
+    },
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/random-error)"
+      },
+      "name": "random-error-inbound",
+      "policyType": "custom-code-inbound"
+    }
+  ]
 }

@@ -1,7 +1,9 @@
 {
   "info": {
     "title": "Jericalla Mobile API v1",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "Version 1.0.0 is deprecated and will be retired on 2025-06-30. Please upgrade to version 2.0.0.",
+    "x-deprecated": "2025-01-01T23:59:59Z"
   },
   "openapi": "3.0.1",
   "components": {
@@ -140,6 +142,8 @@
         "tags": [
           "Customer"
         ],
+        "deprecated": true,
+        "description": "This endpoint is deprecated and will be removed on 2025-06-30. Use /v2/new-endpoint instead.",
         "parameters": [
           {
             "name": "id",
@@ -359,7 +363,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "sleep-inbound"
+            ]
           }
         },
         "summary": "Get customer usage (deprecated)"
@@ -836,7 +842,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "random-error-inbound"
+            ]
           }
         },
         "summary": "Get all partners (deprecated)"
