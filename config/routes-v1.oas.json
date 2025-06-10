@@ -1006,6 +1006,39 @@
         },
         "summary": "Get partnership agreements (deprecated)"
       }
+    },
+    "/api/v1/Customer/service/greeting": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "GenAI Customer service greeting",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "rewritePattern": "https://api.openai.com/v1/responses"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "basic-rate-limit-inbound",
+              "change-method-inbound",
+              "clear-headers-inbound",
+              "set-openai-auth-inbound",
+              "create-openaibody-inbound"
+            ],
+            "outbound": [
+              "clear-openaiheaders-outbound",
+              "transform-openaibody-outbound"
+            ]
+          }
+        },
+        "operationId": "d1f2a0b3-e4dc-45e7-aa0a-37836580f5d6"
+      }
     }
   }
 }
