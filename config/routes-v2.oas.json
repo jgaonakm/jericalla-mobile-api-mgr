@@ -203,7 +203,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "basic-rate-limit-inbound"
+            ]
           }
         },
         "summary": "Get customer information"
@@ -359,7 +361,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "api-key-inbound"
+            ]
           }
         },
         "summary": "Get customer usage"
@@ -1001,6 +1005,27 @@
           }
         },
         "summary": "Get partnership agreements"
+      }
+    },
+    "/api/v2/dummy": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "A dummy API that goes nowhere",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/hello-world)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": []
+          }
+        },
+        "operationId": "47039e90-78e3-4978-9e63-e52290fd8b38"
       }
     }
   }
