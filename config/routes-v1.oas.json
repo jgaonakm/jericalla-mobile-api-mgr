@@ -200,17 +200,15 @@
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "${env.ACCOUNTS_URL}"
-            }
+            "export": "default",
+            "module": "$import(./modules/deprecated)",
+            "options": {}
           },
           "policies": {
             "inbound": []
           }
         },
-        "summary": "Get customer information (deprecated)"
+        "summary": "Get customer information (deprecated) "
       },
       "put": {
         "tags": [
@@ -289,7 +287,8 @@
             "inbound": []
           }
         },
-        "summary": "Update customer information (deprecated)"
+        "summary": "Update customer information (deprecated)",
+        "description": ""
       }
     },
     "/api/v1/Customer/{id}/usage": {
@@ -423,7 +422,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "change-method-inbound-1"
+            ]
           }
         },
         "summary": "Change customer plan (deprecated)"
@@ -674,7 +675,7 @@
         "summary": "Register a new device (deprecated)"
       }
     },
-    "/api/v1/Network/roaming": {
+    "/api/v1/Network/roaming?simId={SIMXX}": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
@@ -747,7 +748,8 @@
             "inbound": []
           }
         },
-        "summary": "Get roaming status (deprecated)"
+        "summary": "Get roaming status (deprecated)",
+        "description": ""
       }
     },
     "/api/v1/Network/roaming/update": {
