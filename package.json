@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "zuplo dev",
-    "test": "zuplo test"
+    "test": "zuplo test",
+    "docs": "npm run dev --workspace docs"
   },
   "dependencies": {
     "zuplo": "^6"
@@ -13,5 +14,8 @@
   "devDependencies": {
     "@types/node": "^22",
     "typescript": "^5"
-  }
+  },
+  "workspaces": [
+    "docs"
+  ]
 }

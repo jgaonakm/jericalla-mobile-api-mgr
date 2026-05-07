@@ -208,7 +208,8 @@
             ]
           }
         },
-        "summary": "Get customer information"
+        "summary": "Get customer information",
+        "description": ""
       },
       "put": {
         "tags": [
@@ -361,9 +362,7 @@
             }
           },
           "policies": {
-            "inbound": [
-              "api-key-inbound"
-            ]
+            "inbound": []
           }
         },
         "summary": "Get customer usage"
@@ -1027,6 +1026,184 @@
         },
         "operationId": "47039e90-78e3-4978-9e63-e52290fd8b38"
       }
+    },
+    "/mcp/customer": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "post": {
+        "summary": "MCP Server",
+        "description": "Default MCP Server",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "mcpServerHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "name": "Jericalla Mobile - Customer",
+              "operations": [
+                {
+                  "file": "./config/routes-v2.oas.json",
+                  "id": "customer-info-mcp"
+                },
+                {
+                  "file": "./config/routes-v2.oas.json",
+                  "id": "prompt"
+                }
+              ]
+            }
+          },
+          "policies": {
+            "inbound": []
+          }
+        },
+        "operationId": "ccd8d10c-d4da-4291-9b26-a8b4794c011f"
+      }
+    },
+    "/ai/customer-info/": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "post": {
+        "summary": "Customer info tool for MCP",
+        "description": "Aggregates customer profile information, as well as plan consumption data",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/customer-info)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": []
+          },
+          "mcp": {
+            "type": "tool",
+            "name": "Customer information",
+            "description": "Aggregates customer profile information, as well as plan consumption data",
+            "annotations": {
+              "readOnlyHint": true
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "customerId"
+                ],
+                "properties": {
+                  "customerId": {
+                    "type": "integer",
+                    "description": "ID of the customer to get information for"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Client information with consumption data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "usage": {
+                      "type": "object",
+                      "properties": {
+                        "customerId": {
+                          "type": "integer",
+                          "description": "ID of the customer we're getting information for"
+                        },
+                        "dataUsedGB": {
+                          "type": "number",
+                          "description": "Gigabytes used in the current month"
+                        },
+                        "minutesUsed": {
+                          "type": "integer",
+                          "description": "Call minutes used in the current month"
+                        },
+                        "smsUsed": {
+                          "type": "integer",
+                          "description": "Messages sent in the current month"
+                        }
+                      }
+                    },
+                    "profile": {
+                      "type": "object",
+                      "properties": {
+                        "customerID": {
+                          "type": "integer",
+                          "description": "ID of the customer we're getting information for"
+                        },
+                        "fullName": {
+                          "type": "string",
+                          "description": "The name of the account owner"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "The e-mail registered on the account"
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "description": "The phone number registered on the account"
+                        },
+                        "address": {
+                          "type": "string",
+                          "description": "The address registered on the account"
+                        }
+                      }
+                    },
+                    "recommendation": {
+                      "type": "string",
+                      "description": "System generated recommendation to be expressed by the customer service representative"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "customer-info-mcp",
+        "tags": [
+          "mcp"
+        ],
+        "x-internal": true
+      }
+    },
+    "/ai/prompt": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "post": {
+        "summary": "Prompt for MCP",
+        "description": "",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/rude-representative-prompt)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": []
+          },
+          "mcp": {
+            "type": "prompt"
+          }
+        },
+        "operationId": "prompt"
+      }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "mcp"
+    }
+  ]
 }

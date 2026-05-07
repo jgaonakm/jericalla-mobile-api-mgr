@@ -198,6 +198,29 @@
       },
       "name": "transform-openaibody-outbound",
       "policyType": "custom-code-outbound"
+    },
+    {
+      "handler": {
+        "export": "ApiKeyInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "allowUnauthenticatedRequests": false,
+          "cacheTtlSeconds": 60
+        }
+      },
+      "name": "api-key-inbound-1",
+      "policyType": "api-key-inbound"
+    },
+    {
+      "handler": {
+        "export": "ChangeMethodInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "method": "GET"
+        }
+      },
+      "name": "change-method-inbound-1",
+      "policyType": "change-method-inbound"
     }
   ]
 }
